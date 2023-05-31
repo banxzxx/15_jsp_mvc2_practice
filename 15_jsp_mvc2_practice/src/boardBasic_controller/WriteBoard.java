@@ -19,7 +19,7 @@ public class WriteBoard extends HttpServlet {
        
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dis = request.getRequestDispatcher("2_step1_boardBasicEx/bWrite.jsp"); 
+		RequestDispatcher dis = request.getRequestDispatcher("step1_boardBasicEx2/bWrite.jsp"); 
 		dis.forward(request, response);
 	}
 
@@ -45,7 +45,7 @@ public class WriteBoard extends HttpServlet {
 				jsScript += "</script>";
 				
 				
-		pw.print(jsScript);
+		pw.print(jsScript); // 새로운 html 생성
 	}
 
 }
