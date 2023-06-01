@@ -31,7 +31,35 @@ public class DeleteBoard extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//지우려고 한 정보를 받았다 !
 		
+		request.setCharacterEncoding("utf-8");
+		
+		// 지우려는 정보의 객체 DTO 만들어주기
+		BoardDTO boardDTO = new BoardDTO();
+		boardDTO.setBoardId(Long.parseLong(request.getParameter("boardId")));
+		boardDTO.setPassword(request.getParameter("password"));
+		
+		
+		//지운 후 가상의 html을 통해 지움 여부를 알리기
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter pw = response.getWriter();
+		
+		String jsScript = "";
+		if (BoardDAO.getInstance().deleteBoard(boardDTO) ) {
+			jsScript = "<script>";
+			jsScript += "alert('deleted successfully !');";
+			jsScript += "location.href='bList';";
+			jsScript += "</script>";
+		}
+		else {
+			jsScript = "<script>";
+			jsScript += "alert('check your password');";
+			jsScript += "history.go(-1);";
+			jsScript += "</script>";
+		}
+		
+		pw.write(jsScript);
 		
 	}
 
